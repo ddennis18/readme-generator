@@ -9,7 +9,7 @@ function App() {
   const [error, setError] = useState("");
   const [status, setStatus] = useState(null);
 
-  const handleGenerate = async (url) => {
+  const handleGenerate = async (url, projectName, description) => {
     setLoading(true);
     setError("");
     setReadme("");
@@ -19,7 +19,11 @@ function App() {
       const response = await fetch("http://localhost:3000/generate-readme", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ repoUrl: url }),
+        body: JSON.stringify({
+          repoUrl: url,
+          projectName,
+          projectDescription: description,
+        }),
       });
 
       const data = await response.json();

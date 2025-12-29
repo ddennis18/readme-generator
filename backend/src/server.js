@@ -28,7 +28,7 @@ app.use(cors());
 app.use(express.json());
 
 app.post("/generate-readme", async (req, res) => {
-  const { repoUrl } = req.body;
+  const { repoUrl, projectName, projectDescription } = req.body;
   if (!repoUrl) {
     return res.status(400).json({ error: "repoUrl is required" });
   }
@@ -76,7 +76,10 @@ app.post("/generate-readme", async (req, res) => {
     console.log(chalk.green(`Aggregation complete for ${metadata.name}`));
 
     // 4. Generate README
-    const readme = await generateReadme(aggregatedData);
+    const readme = await generateReadme(aggregatedData, {
+      projectName,
+      projectDescription,
+    });
 
     res.json({
       readme,
