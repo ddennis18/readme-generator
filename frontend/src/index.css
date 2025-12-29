@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background-color: #171717;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.prose h1 {
+  @apply text-3xl font-bold mb-6 text-white;
+}
+
+.prose h2 {
+  @apply text-2xl font-semibold mt-8 mb-4 text-neutral-100;
+}
+
+.prose h3 {
+  @apply text-xl font-medium mt-6 mb-3 text-neutral-200;
+}
+
+.prose p {
+  @apply text-neutral-400 mb-4 leading-relaxed;
+}
+
+.prose ul {
+  @apply list-disc list-inside space-y-2 mb-6 text-neutral-400;
+}
+
+.prose code {
+  @apply bg-neutral-800 px-1.5 py-0.5 rounded text-blue-400 font-mono text-sm;
+}
+
+.prose pre {
+  @apply rounded-xl !bg-neutral-900 border border-neutral-700 p-4 mb-6;
+}
