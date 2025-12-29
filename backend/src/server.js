@@ -15,17 +15,27 @@ import { reactPlugin } from "./plugins/react.plugin.js";
 import { aggregate } from "./analysis/aggregator.js";
 import { generateReadme } from "./generator/readmeGenerator.js";
 
+import { fileURLToPath } from "url";
+import path from "path";
+
 dotenv.config();
 
 // Register plugins
 pluginManager.register(expressPlugin);
 pluginManager.register(reactPlugin);
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
+
+// Serve static files from the frontend/dist directory
+const frontendDistPath = path.join(__dirname, "../../frontend/dist");
+app.use(express.static(frontendDistPath));
 
 app.post("/generate-readme", async (req, res) => {
   const { repoUrl, projectName, projectDescription } = req.body;
@@ -90,6 +100,11 @@ app.post("/generate-readme", async (req, res) => {
     console.error(chalk.red("Error generating README:"), error.message);
     res.status(500).json({ error: error.message });
   }
+});
+
+// All other GET requests not handled before will return the React app
+app.get("*", (req, res) => {
+  res.sendFile(path.join(frontendDistPath, "index.html"));
 });
 
 app.listen(port, () => {

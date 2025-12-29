@@ -17,7 +17,7 @@ function App() {
     setStatus(null);
 
     try {
-      const response = await fetch("http://localhost:3000/generate-readme", {
+      const response = await fetch("/generate-readme", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

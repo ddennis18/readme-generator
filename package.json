@@ -2,21 +2,14 @@
   "name": "readme-generator",
   "version": "1.0.0",
   "description": "Deterministic GitHub README generator using Tree-sitter and LLMs",
-  "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "node src/index.js",
+    "build": "npm install && cd frontend && npm install && npm run build && cd ../backend && npm install",
+    "start": "cd backend && npm start",
+    "dev": "npx concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "octokit": "^4.0.2",
-    "tree-sitter": "^0.21.1",
-    "tree-sitter-javascript": "^0.21.0",
-    "tree-sitter-python": "^0.21.0",
-    "tree-sitter-html": "^0.20.1",
-    "tree-sitter-css": "^0.20.0",
-    "openai": "^4.28.0",
-    "dotenv": "^16.4.5",
-    "chalk": "^5.3.0"
+    "concurrently": "^8.2.2"
   }
 }
